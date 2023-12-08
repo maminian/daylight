@@ -6,7 +6,7 @@ import datetime
 #
 day = np.arange(365)+10 # shift for winter solstice
 date_of_year = [datetime.datetime(2023, 1,1) + datetime.timedelta(days=int(i)-10) for i in day]
-lat = np.arange(0,91)
+lat = np.arange(-90,91)
 
 axis = 23.439 # in degrees
 
@@ -21,7 +21,7 @@ b = np.arccos(1-M)/np.pi*24
 if __name__=="__main__":
     fig,ax = plt.subplots(figsize=(8,4), constrained_layout=True)
 
-    duh = ax.contourf(date_of_year,lat,b, levels=np.arange(0,25), cmap=plt.cm.inferno)
+    duh = ax.contourf(date_of_year,lat,b, levels=np.arange(0,25,2), cmap=plt.cm.inferno)
 
     levs = np.array([1,6,12,18,23])
     levcols = plt.cm.inferno(levs/24)**0.5
@@ -41,8 +41,8 @@ if __name__=="__main__":
 
     ax.set(xlabel='Day of year', ylabel='Latitude (degrees)')
 #    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
-    ax.grid(which='major', c=[1,1,1,0.5], lw=0.5)
-    ax.grid(which='minor', c=[1,1,1,0.2], lw=0.2)
+    ax.grid(axis='x', which='major', c=[1,1,1,0.5], lw=0.5)
+    ax.grid(axis='x', which='minor', c=[1,1,1,0.2], lw=0.2)
 
     fig.show()
 
